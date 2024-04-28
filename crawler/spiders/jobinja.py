@@ -1,6 +1,9 @@
 from typing import Any
 import scrapy
+from scrapy.loader import ItemLoader
 from scrapy.http import Response
+
+from items import JobinjaItem
 
 class JobinjaSpider(scrapy.Spider):
     name = 'jobinja'
@@ -8,4 +11,21 @@ class JobinjaSpider(scrapy.Spider):
 
 
     def parse(self, response: Response, **kwargs: Any) -> Any:
-        yield {'url':response.url}
+        self.logger.info(msg=f'\n\n start crawl {self.name} \n\n')
+        
+        works = response.xpath('//*[@id="js-jobSeekerSearchResult"]/div/div[3]/section/div/ul/li')
+        for work in works:
+            loader = ItemLoader(item=JobinjaItem(), selector=work)
+            
+            loader.add_value('provider',self.name)
+            loader.add_xpath('title','div/div[1]/h2/a/text()')
+            loader.add_xpath('link','div/div[1]/h2/a/@href')
+            loader.add_xpath('cover','div/div[1]/a/img/@src')
+            loader.add_xpath('company_name','div/div[1]/ul/li[1]/span/text()')
+            loader.add_xpath('company_city','div/div[1]/ul/li[2]/span/text()')
+            loader.add_xpath('type_cooperation','div/div[1]/ul/li[3]/span/span/text()')
+            loader.add_value('date','today')
+            loader.add_value('tags',[])
+        
+
+            yield loader.load_item()
