@@ -1,0 +1,6 @@
+mongo:
+  database : "Enter Your mongo : database_name"
+  host : "Enter Your mongo : host"
+  port : "Enter Your mongo : port"
+  username : "Enter Your mongo : username"
+  password : "Enter Your mongo : password"
