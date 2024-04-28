@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 scrapy = "^2.11.1"
 mongoengine = "^0.28.2"
+dynaconf = "^3.2.5"
 
 
 [build-system]
