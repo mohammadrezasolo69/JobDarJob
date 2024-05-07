@@ -1,13 +1,27 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+from db.conection import connect_to_db, close_connection_db
+from pprint import pprint
+from db.models import JobPosition
 
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+class ImdbPipelineSingle:
 
-
-class CrawlerPipeline:
     def process_item(self, item, spider):
+        connect_to_db()
+
+        print('******************************************************')
+        pprint(item)
+        print('******************************************************')
+
+        JobPosition(
+            provider=item['provider'],
+            title=item['title'],
+            url_detail=item['url_detail'],
+            cover=item['cover'],
+            company_name=item['company_name'],
+            company_city=item['company_city'],
+            type_cooperation=item['type_cooperation'],
+            # date=item['date'],
+            slug=item['slug'],
+        ).save()
+
         return item
