@@ -1,4 +1,4 @@
-from db.conection import connect_to_db, close_connection_db
+from db.conection import connect_to_db
 from pprint import pprint
 from db.models import JobPosition
 
