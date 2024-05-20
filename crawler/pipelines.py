@@ -11,14 +11,7 @@ class JoninjaPipeline:
         connect_to_db()
 
     def process_item(self, item, spider):
-        print('******************************************************')
-        # pprint(item)
-        # print('******************************************************')
-
-        provider = Provider.objects(slug=item['provider'])
-        print(provider)
-        print('******************************************************')
-
+        provider = Provider.objects.filter(slug=item['provider']).first()
 
         if item['slug'] != provider.last_slug:
             JobPosition(
@@ -33,10 +26,6 @@ class JoninjaPipeline:
                 slug=item['slug'],
             ).save()
 
-        provider.last_slug = item['slug']
-        provider.run_date = datetime.now()
-        provider.save()
+        provider.update(last_slug=item['slug'], run_date=datetime.now())
 
         return item
-
-
