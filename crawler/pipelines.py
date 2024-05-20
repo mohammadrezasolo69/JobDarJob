@@ -5,17 +5,20 @@ from pprint import pprint
 from db.models import JobPosition, Provider
 
 
-class ImdbPipelineSingle:
+class JoninjaPipeline:
 
     def open_spider(self, spider):
         connect_to_db()
 
     def process_item(self, item, spider):
         print('******************************************************')
-        pprint(item)
+        # pprint(item)
+        # print('******************************************************')
+
+        provider = Provider.objects(slug=item['provider'])
+        print(provider)
         print('******************************************************')
 
-        provider = Provider.objects(slug=item['provider']).last()
 
         if item['slug'] != provider.last_slug:
             JobPosition(
