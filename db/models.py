@@ -3,7 +3,6 @@ from mongoengine import Document,StringField , BooleanField,DateTimeField,UUIDFi
 
 class Provider(Document):
     slug = StringField(max_length=100,required=True,unique=True)
-    name = StringField(max_length=100,required=True,unique=True)
     is_active = BooleanField(default=True)
     run_date = DateTimeField(required=True)
     last_slug = StringField(unique=True)
