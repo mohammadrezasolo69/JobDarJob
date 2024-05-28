@@ -12,6 +12,7 @@ def clean_text(text):
     text = unicodedata.normalize('NFKD', text)
     return text
 
+
 # ------------------------------------------- Jobinja ------------------------------------------------
 
 def jobinja_clean_url(url):
@@ -43,6 +44,7 @@ class JobinjaItem(scrapy.Item):
         input_processor=processors.MapCompose(jobinja_extract_slug_from_url),
         output_processor=processors.TakeFirst()
     )
+
 
     title = scrapy.Field(
         input_processor=processors.MapCompose(clean_text),
