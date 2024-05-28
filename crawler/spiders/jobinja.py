@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 from typing import Any
 import scrapy
 from scrapy.loader import ItemLoader
@@ -32,7 +33,7 @@ class JobinjaSpider(scrapy.Spider):
             loader.add_xpath('company_city', 'div/div[1]/ul/li[2]/span/text()')
             loader.add_xpath('type_cooperation', 'div/div[1]/ul/li[3]/span/span/text()')
 
-            # loader.add_value('date',)
+            loader.add_value('date', datetime.now())
             # loader.add_value('tags',[])
 
             if self.last_slug is None and number == 0:

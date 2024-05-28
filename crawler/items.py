@@ -76,5 +76,9 @@ class JobinjaItem(scrapy.Item):
         output_processor=processors.TakeFirst()
     )
 
-    # date = scrapy.Field()
+    date = scrapy.Field(
+        input_processor=processors.Identity(),
+        output_processor=processors.TakeFirst()
+    )
+
     # tags = scrapy.Field()

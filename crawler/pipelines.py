@@ -26,7 +26,7 @@ class JoninjaPipeline:
             company_name=item['company_name'],
             company_city=item['company_city'],
             type_cooperation=item['type_cooperation'],
-            # date=item['date'],
+            date=item['date'],
             slug=item['slug'],
         ).save()
 
